@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
-import '../App.css';
+import { NavLink } from "react-router-dom";
+import "../App.css";
 export const HomePage = () => {
   return (
     <div className="flex flex-col justify-between items-center min-h-full">
@@ -7,7 +7,7 @@ export const HomePage = () => {
         To navigate to the next screen click here
       </h1>
       <NavLink
-        to={'/movies'}
+        to={"/movies"}
         className="mt-10 text-3xl bg-cyan-200 p-3 rounded-md"
       >
         To Movies

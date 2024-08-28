@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { NavLink } from 'react-router-dom';
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { NavLink } from "react-router-dom";
 
 export type Movie = {
   imdbID: string;
@@ -11,20 +11,20 @@ export type Movie = {
 };
 
 const MoviePage = () => {
-  const [query, setQuery] = useState(''); // Just for dummy in the input
-  const [searchTerm, setSearchTerm] = useState('');
+  const [query, setQuery] = useState(""); // Just for dummy in the input
+  const [searchTerm, setSearchTerm] = useState("");
 
   const {
     data: searchedMovies, // Aliasing with the name searchedMovie
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['movies', searchTerm], // add a unique key and the dependency thing which is the search term
+    queryKey: ["movies", searchTerm], // add a unique key and the dependency thing which is the search term
     queryFn: async () => {
       // what u want to fetch
       if (!searchTerm) return [];
       const req = await fetch(
-        `http://www.omdbapi.com/?apikey=f84fc31d&s=${searchTerm}`
+        `http://www.omdbapi.com/?apikey=f84fc31d&s=${searchTerm}`,
       );
       const res = await req.json();
       return res.Search || [];
@@ -33,7 +33,7 @@ const MoviePage = () => {
 
   function handleSubmit() {
     setSearchTerm(query);
-    setQuery('');
+    setQuery("");
   }
 
   return (
@@ -42,7 +42,7 @@ const MoviePage = () => {
         We are in the movies page <br />
       </div>
       <NavLink
-        to={'/all_movies'}
+        to={"/all_movies"}
         className="bg-cyan-100 text-pretty text-cyan-700  p-2 rounded-lg items-center justify-center"
       >
         Go to Pagination Example

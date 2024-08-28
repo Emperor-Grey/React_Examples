@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { useInfiniteQuery } from 'react-query';
-import { Movie } from './MoviePage';
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { useInfiniteQuery } from "react-query";
+import { Movie } from "./MoviePage";
 
 const MoviePageInfinite = () => {
-  const [query, setQuery] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [query, setQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { ref, inView } = useInView(); // TO FIND WHERE WE ARE IN THE CURRENT SCREEN , not using normal ref but using a lib
 
@@ -16,12 +16,12 @@ const MoviePageInfinite = () => {
     fetchNextPage,
     isError,
   } = useInfiniteQuery({
-    queryKey: ['movies', searchTerm],
+    queryKey: ["movies", searchTerm],
     queryFn: async ({ pageParam = 1 }) => {
       // Hard coding the page at the start the api doesn't provide much things
       if (!searchTerm) return { results: [], total_results: 0 };
       const req = await fetch(
-        `http://www.omdbapi.com/?apikey=f84fc31d&s=${searchTerm}&page=${pageParam}`
+        `http://www.omdbapi.com/?apikey=f84fc31d&s=${searchTerm}&page=${pageParam}`,
       );
       const res = await req.json();
       return {
@@ -44,7 +44,7 @@ const MoviePageInfinite = () => {
 
   function handleSubmit() {
     setSearchTerm(query);
-    setQuery('');
+    setQuery("");
   }
 
   const movies = searchedMovies?.pages?.flatMap((page) => page.results);
